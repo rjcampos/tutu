@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Controller extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/login.html");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/login.jsp");
 		dispatcher.forward(req, resp);
 	}
 }

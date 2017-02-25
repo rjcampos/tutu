@@ -13,5 +13,9 @@
 			<input type="submit" value="Entrar" />
 		</fieldset>
 	</form>
+	<footer>
+		<p>Feito por: Raimundo Campos - Todos os direitos reservados</p>
+		<p>Contato: raimundojr89@gmail.com</p>
+	</footer>
 </body>
 </html>
