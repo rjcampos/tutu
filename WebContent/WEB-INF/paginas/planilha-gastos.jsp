@@ -3,6 +3,13 @@
 <head>
 <title>Planilha de gastos</title>
 <meta charset="utf-8">
+<link rel="stylesheet" href="css/reset.css" />
+<!--Import Google Icon Font-->
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"
+	media="screen,projection" />
 </head>
 <body>
 	<h1>Planilha</h1>
@@ -68,5 +75,7 @@
 		<p>Feito por: Raimundo Campos - Todos os direitos reservados</p>
 		<p>Contato: raimundojr89@gmail.com</p>
 	</footer>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
