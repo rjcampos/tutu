@@ -10,18 +10,37 @@
 <!--Import materialize.css-->
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
+<link type="text/css" rel="stylesheet" href="css/estilos.css" />
 </head>
+
 <body>
-	<p>Insira seu login e senha</p>
-	<form method="POST">
-		<fieldset>
-			Login: <input type="text" name="login" /> Senha: <input
-				type="password" name="senha" /> <input type="submit" value="Entrar" />
-		</fieldset>
-	</form>
+	<header> </header>
+	<main>
+	<div class="container section">
+		<h3 class="flow-text center-align">Insira seu login e senha:</h3>
+		<div class="row">
+			<div class="col s6 offset-s3">
+				<form method="POST">
+					<fieldset>
+						<div class="input-field">
+							<label for="login">Login</label> <input type="text" name="login"
+								id="login" />
+						</div>
+						<div class="input-field">
+							<label for="senha">Senha</label> <input type="password"
+								name="senha" id="senha" />
+						</div>
+						<input type="submit" value="Entrar" />
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	</main>
 	<footer class="page-footer">
-		<p>Feito por: Raimundo Campos - Todos os direitos reservados</p>
-		<p>Contato: raimundojr89@gmail.com</p>
+		<div class="container">
+			<p>Feito por: Raimundo Campos - Todos os direitos reservados</p>
+		</div>
 	</footer>
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
