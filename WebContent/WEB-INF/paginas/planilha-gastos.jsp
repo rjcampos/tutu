@@ -15,103 +15,106 @@
 </head>
 <body>
 	<main>
-		<div class="container section">
-			<div class="dados-sessao">
-				<p>Logado como: usuario</p>
-				<p>Mês/ano</p>
-			</div>
-			<section class="receitas">
-				<table class="bordered highlight">
-					<thead>
-						<tr>
-							<th colspan="2">Receitas</th>
-						</tr>
-						<tr>
-							<th>Descrição</th>
-							<th>Valor</th>
-						</tr>
-					</thead>
-					<tfoot>
-						<tr>
-							<td>Total</td>
-							<td>5000</td>
-						</tr>
-					</tfoot>
-					<tbody>
-						<tr>
-							<td>Lorem ipsum</td>
-							<td>123.45</td>
-							<td>
-								<a href="#" class=" btn-floating btn-medium waves-effect waves-light blue">
-									<i class="material-icons">edit</i>
-								</a>
-							</td>
-							<td>
-								<a href="#" class=" btn-floating btn-medium waves-effect waves-light pink">
-									<i class="material-icons">delete</i>
-								</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<a href="#" class=" btn-floating btn-medium waves-effect waves-light green" id="botaoAdicionaReceita">
-					<i class="material-icons">add</i>
-				</a>
-				<form method="POST" class="row escondido" id="formInclusaoReceita">
-					<fieldset class="col s4">
-						<div class="input-field">
-						<label for="novaReceitaDescricao">Descrição</label> <input type="text" name="novaReceitaDescricao"
-								id="novaReceitaDescricao" />
-						</div>
-						<div class="input-field">
-							<label for="novaReceitaValor">Valor</label> <input type="text"
-								name="novaReceitaValor" id="novaReceitaValor" />
-						</div>
-						<input type="submit" value="Entrar" />
-					</fieldset>
-				</form>
-			</section>
-			
-			
-			<section class="despesas">
-				<table class="bordered highlight">
-					<thead>
-						<tr>
-							<th colspan="2">Despesas</th>
-						</tr>
-						<tr>
-							<th>Descrição</th>
-							<th>Valor</th>
-						</tr>
-					</thead>
-					<tfoot>
-						<tr>
-							<td>Total</td>
-							<td>5000</td>
-						</tr>
-					</tfoot>
-					<tbody>
-						<tr>
-							<td>Lorem ipsum</td>
-							<td>123.45</td>
-							<td>
-								<a href="#" class=" btn-floating btn-medium waves-effect waves-light blue">
-									<i class="material-icons">edit</i>
-								</a>
-							</td>
-							<td>
-								<a href="#" class=" btn-floating btn-medium waves-effect waves-light pink">
-									<i class="material-icons">delete</i>
-								</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<a href="#" class=" btn-floating btn-medium waves-effect waves-light red">
-					<i class="material-icons">add</i>
-				</a>
-			</section>
+	<div class="container section">
+		<div class="dados-sessao">
+			<p>Logado como: usuario</p>
+			<p>Mês/ano</p>
 		</div>
+		<section class="receitas">
+			<table class="bordered highlight">
+				<thead>
+					<tr>
+						<th colspan="2">Receitas</th>
+					</tr>
+					<tr>
+						<th>Descrição</th>
+						<th>Valor</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td>Total</td>
+						<td>5000</td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<tr>
+						<td>Lorem ipsum</td>
+						<td>123.45</td>
+						<td><a href="#"
+							class=" btn-floating btn-medium waves-effect waves-light blue">
+								<i class="material-icons">edit</i>
+						</a></td>
+						<td><a href="#"
+							class=" btn-floating btn-medium waves-effect waves-light pink">
+								<i class="material-icons">delete</i>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="#"
+				class=" btn-floating btn-medium waves-effect waves-light green"
+				id="botaoAdicionaReceita"> <i class="material-icons">add</i>
+			</a>
+			<form method="POST" class="row escondido" id="formInclusaoReceita">
+				<fieldset class="col s4">
+					<div class="input-field">
+						<label for="novaReceitaDescricao">Descrição</label> <input
+							type="text" name="novaReceitaDescricao" id="novaReceitaDescricao" />
+					</div>
+					<div class="input-field">
+						<label for="novaReceitaValor">Valor</label> <input type="text"
+							name="novaReceitaValor" id="novaReceitaValor" />
+					</div>
+					<a href="#" class=" btn-floating btn-small waves-effect waves-light green" id="confirmaNovaReceita">
+						<i class="material-icons">done</i>
+					</a> 
+					<a href="#" class=" btn-floating btn-small waves-effect waves-light red" id="cancelaNovaReceita">
+						<i class="material-icons">cancel</i>
+					</a>
+				</fieldset>
+			</form>
+		</section>
+
+
+		<section class="despesas">
+			<table class="bordered highlight">
+				<thead>
+					<tr>
+						<th colspan="2">Despesas</th>
+					</tr>
+					<tr>
+						<th>Descrição</th>
+						<th>Valor</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td>Total</td>
+						<td>5000</td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<tr>
+						<td>Lorem ipsum</td>
+						<td>123.45</td>
+						<td><a href="#"
+							class=" btn-floating btn-medium waves-effect waves-light blue">
+								<i class="material-icons">edit</i>
+						</a></td>
+						<td><a href="#"
+							class=" btn-floating btn-medium waves-effect waves-light pink">
+								<i class="material-icons">delete</i>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="#"
+				class=" btn-floating btn-medium waves-effect waves-light red"> <i
+				class="material-icons">add</i>
+			</a>
+		</section>
+	</div>
 	</main>
 	<footer class="page-footer">
 		<div class="container">
