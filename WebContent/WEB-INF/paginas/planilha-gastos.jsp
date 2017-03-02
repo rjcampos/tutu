@@ -21,9 +21,6 @@
 				<p>Mês/ano</p>
 			</div>
 			<section class="receitas">
-				<a href="#" class=" btn-floating btn-medium waves-effect waves-light green">
-					<i class="material-icons">add</i>
-				</a>
 				<table class="bordered highlight">
 					<thead>
 						<tr>
@@ -57,11 +54,26 @@
 						</tr>
 					</tbody>
 				</table>
-			</section>
-			<section class="despesas">
-				<a href="#" class=" btn-floating btn-medium waves-effect waves-light red">
+				<a href="#" class=" btn-floating btn-medium waves-effect waves-light green" id="botaoAdicionaReceita">
 					<i class="material-icons">add</i>
 				</a>
+				<form method="POST" class="row escondido" id="formInclusaoReceita">
+					<fieldset class="col s4">
+						<div class="input-field">
+						<label for="novaReceitaDescricao">Descrição</label> <input type="text" name="novaReceitaDescricao"
+								id="novaReceitaDescricao" />
+						</div>
+						<div class="input-field">
+							<label for="novaReceitaValor">Valor</label> <input type="text"
+								name="novaReceitaValor" id="novaReceitaValor" />
+						</div>
+						<input type="submit" value="Entrar" />
+					</fieldset>
+				</form>
+			</section>
+			
+			
+			<section class="despesas">
 				<table class="bordered highlight">
 					<thead>
 						<tr>
@@ -95,6 +107,9 @@
 						</tr>
 					</tbody>
 				</table>
+				<a href="#" class=" btn-floating btn-medium waves-effect waves-light red">
+					<i class="material-icons">add</i>
+				</a>
 			</section>
 		</div>
 	</main>
@@ -105,5 +120,7 @@
 	</footer>
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/jquery.maskMoney.js"></script>
+	<script type="text/javascript" src="js/planilha-gastos.js"></script>
 </body>
 </html>

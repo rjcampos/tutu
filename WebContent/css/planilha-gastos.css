@@ -9,3 +9,7 @@
 .receitas{
 	padding-bottom: 5em;
 }
+
+.escondido{
+	display: none;
+}
