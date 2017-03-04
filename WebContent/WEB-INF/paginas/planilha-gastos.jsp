@@ -37,7 +37,7 @@
 						<td>5000</td>
 					</tr>
 				</tfoot>
-				<tbody>
+				<tbody id="corpoTabelaReceita">
 					<tr>
 						<td>Lorem ipsum</td>
 						<td>123.45</td>
@@ -59,12 +59,12 @@
 			<form method="POST" class="row escondido" id="formInclusaoReceita">
 				<fieldset class="col s4">
 					<div class="input-field">
-						<label for="novaReceitaDescricao">Descrição</label> <input
-							type="text" name="novaReceitaDescricao" id="novaReceitaDescricao" />
+						<label for="descricaoReceita">Descrição</label> <input
+							type="text" name="descricaoReceita" id="descricaoReceita" />
 					</div>
 					<div class="input-field">
-						<label for="novaReceitaValor">Valor</label> <input type="text"
-							name="novaReceitaValor" id="novaReceitaValor" />
+						<label for="valorReceita">Valor</label> <input type="text"
+							name="valorReceita" id="valorReceita" />
 					</div>
 					<a href="#" class=" btn-floating btn-small waves-effect waves-light green" id="confirmaNovaReceita">
 						<i class="material-icons">done</i>
@@ -94,7 +94,7 @@
 						<td>5000</td>
 					</tr>
 				</tfoot>
-				<tbody>
+				<tbody id="corpoTabelaDespesa">
 					<tr>
 						<td>Lorem ipsum</td>
 						<td>123.45</td>
@@ -110,9 +110,27 @@
 				</tbody>
 			</table>
 			<a href="#"
-				class=" btn-floating btn-medium waves-effect waves-light red"> <i
+				class=" btn-floating btn-medium waves-effect waves-light red" id="botaoAdicionaDespesa"> <i
 				class="material-icons">add</i>
 			</a>
+			<form method="POST" class="row escondido" id="formInclusaoDespesa">
+				<fieldset class="col s4">
+					<div class="input-field">
+						<label for="descricaoDespesa">Descrição</label> <input
+							type="text" name="descricaoDespesa" id="descricaoDespesa" />
+					</div>
+					<div class="input-field">
+						<label for="valorDespesa">Valor</label> <input type="text"
+							name="valorDespesa" id="valorDespesa" />
+					</div>
+					<a href="#" class=" btn-floating btn-small waves-effect waves-light green" id="confirmaNovaDespesa">
+						<i class="material-icons">done</i>
+					</a> 
+					<a href="#" class=" btn-floating btn-small waves-effect waves-light red" id="cancelaNovaDespesa">
+						<i class="material-icons">cancel</i>
+					</a>
+				</fieldset>
+			</form>
 		</section>
 	</div>
 	</main>
