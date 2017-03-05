@@ -39,14 +39,14 @@
 				</tfoot>
 				<tbody id="corpoTabelaReceita">
 					<tr>
-						<td>Lorem ipsum</td>
-						<td>123.45</td>
+						<td class="descricaoReceita">Lorem ipsum</td>
+						<td class="valorReceita">123.45</td>
 						<td><a href="#"
-							class=" btn-floating btn-medium waves-effect waves-light blue">
+							class=" btn-floating btn-medium waves-effect waves-light blue botaoEditaReceita">
 								<i class="material-icons">edit</i>
 						</a></td>
 						<td><a href="#"
-							class=" btn-floating btn-medium waves-effect waves-light pink">
+							class=" btn-floating btn-medium waves-effect waves-light pink botaoExcluiReceita">
 								<i class="material-icons">delete</i>
 						</a></td>
 					</tr>
@@ -59,12 +59,12 @@
 			<form method="POST" class="row escondido" id="formInclusaoReceita">
 				<fieldset class="col s4">
 					<div class="input-field">
-						<label for="descricaoReceita">Descrição</label> <input
-							type="text" name="descricaoReceita" id="descricaoReceita" />
+						<label for="descricaoNovaReceita">Descrição</label> <input
+							type="text" name="descricaoNovaReceita" id="descricaoNovaReceita" />
 					</div>
 					<div class="input-field">
-						<label for="valorReceita">Valor</label> <input type="text"
-							name="valorReceita" id="valorReceita" />
+						<label for="valorNovaReceita">Valor</label> <input type="text"
+							name="valorNovaReceita" id="valorNovaReceita" />
 					</div>
 					<a href="#" class=" btn-floating btn-small waves-effect waves-light green" id="confirmaNovaReceita">
 						<i class="material-icons">done</i>
@@ -96,14 +96,14 @@
 				</tfoot>
 				<tbody id="corpoTabelaDespesa">
 					<tr>
-						<td>Lorem ipsum</td>
-						<td>123.45</td>
+						<td class="descricaoDespesa">Lorem ipsum</td>
+						<td class="valorDespesa">123.45</td>
 						<td><a href="#"
-							class=" btn-floating btn-medium waves-effect waves-light blue">
+							class=" btn-floating btn-medium waves-effect waves-light blue botaoEditaDespesa">
 								<i class="material-icons">edit</i>
 						</a></td>
 						<td><a href="#"
-							class=" btn-floating btn-medium waves-effect waves-light pink">
+							class=" btn-floating btn-medium waves-effect waves-light pink botaoExcluiDespesa">
 								<i class="material-icons">delete</i>
 						</a></td>
 					</tr>
@@ -116,12 +116,12 @@
 			<form method="POST" class="row escondido" id="formInclusaoDespesa">
 				<fieldset class="col s4">
 					<div class="input-field">
-						<label for="descricaoDespesa">Descrição</label> <input
-							type="text" name="descricaoDespesa" id="descricaoDespesa" />
+						<label for="descricaoNovaDespesa">Descrição</label> <input
+							type="text" name="descricaoNovaDespesa" id="descricaoNovaDespesa" />
 					</div>
 					<div class="input-field">
-						<label for="valorDespesa">Valor</label> <input type="text"
-							name="valorDespesa" id="valorDespesa" />
+						<label for="valorNovaDespesa">Valor</label> <input type="text"
+							name="valorNovaDespesa" id="valorNovaDespesa" />
 					</div>
 					<a href="#" class=" btn-floating btn-small waves-effect waves-light green" id="confirmaNovaDespesa">
 						<i class="material-icons">done</i>
