@@ -11,26 +11,30 @@ $(function() {
 		adicionaMovimentacao(event, "Receita");
 	});
 	$("#confirmaNovaReceita").click(function(event){
-		confirmaNovaMovimentacao(event, "Receita");
+		confirmaMovimentacao(event, "Receita");
 	});
-	$("#cancelaNovaReceita").click(cancelaNovaReceita);
+	$("#cancelaNovaReceita").click(function(event){
+		cancelaMovimentacao(event, "Receita");
+	});
 
 	$("#botaoAdicionaDespesa").click(function(event) {
 		adicionaMovimentacao(event, "Despesa");
 	});
 	$("#confirmaNovaDespesa").click(function(event){
-		confirmaNovaMovimentacao(event, "Despesa");
+		confirmaMovimentacao(event, "Despesa");
 	});
-	$("#cancelaNovaDespesa").click(cancelaNovaDespesa);
+	$("#cancelaNovaDespesa").click(function(event){
+		cancelaMovimentacao(event, "Despesa");
+	});
 });
 
 function adicionaMovimentacao(event, movimentacao){
 	event.preventDefault();
 	var idFormulario = buildIdComponente("formInclusao", movimentacao);
-	$(idFormulario).slideDown(600);
+	$(idFormulario).slideToggle(600);
 }
 
-function confirmaNovaMovimentacao(event, movimentacao) {
+function confirmaMovimentacao(event, movimentacao) {
 	event.preventDefault();
 	//Variáveis contendo os ids dos componentes HTML
 	var idInputDescricao = buildIdComponente("descricao", movimentacao);
@@ -38,19 +42,21 @@ function confirmaNovaMovimentacao(event, movimentacao) {
 	var idTabela = buildIdComponente("corpoTabela", movimentacao);
 	var idFormulario = buildIdComponente("formInclusao", movimentacao);
 
-	let
-	descricao = $(idInputDescricao).val();
-	let
-	valor = $(idInputValor).val();
-	$(idTabela).append(novaLinha(descricao, valor));
-
-	zeraValoresFormulario(idFormulario);
-	$(idFormulario).slideUp(600);
+	var descricao = $(idInputDescricao).val();
+	var valor = $(idInputValor).val();
+	if(!valorValido(valor)){
+		alert("Valor da movimentação inválido");
+	}
+	else{
+		$(idTabela).append(novaLinha(descricao, valor));
+	}
+	fechaFormulario(idFormulario);
 }
 
-function cancelaNovaReceita() {
-	zeraValoresFormulario("#formInclusaoReceita");
-	$("#formInclusaoReceita").slideUp(600);
+function cancelaMovimentacao(event, movimentacao) {
+	event.preventDefault();
+	var idFormulario = buildIdComponente("formInclusao", movimentacao);
+	fechaFormulario(idFormulario);
 }
 
 function novaLinha(descricao, valor) {
@@ -77,6 +83,18 @@ function novaLinha(descricao, valor) {
 	meuTr.append(tdEdit);
 	meuTr.append(tdDelete);
 	return meuTr;
+}
+
+function valorValido(valor){
+	if(valor === ""){
+		return false;
+	}
+	return true;
+}
+
+function fechaFormulario(idFormulario){
+	zeraValoresFormulario(idFormulario);
+	$(idFormulario).slideUp(600);
 }
 
 function buildIdComponente(componente, movimentacao){
