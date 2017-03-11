@@ -1,6 +1,6 @@
 //criar coluna data
 //melhorar mensagem de valor invalido
-//analisar substituir os textos nas tabelas por inputs com read only, editaveis ao serem clicados
+//Sumir o botao de editar ou trocá-lo por um botáo de confirma durante a edição
 $(function() {
 	// Criando máscara para aceitar somente numeros no campo valor
 	$("#valorNovaReceita").maskMoney({
@@ -94,27 +94,41 @@ function editaMovimentacao(event, movimentacao, botao){
 	var descricao = tdDescricao.text();
 	var valor = tdValor.text();
 
-	var tdEditaDescricao = buildEditField(descricao, "editaDescricao" + movimentacao);
-	var tdEditaValor = buildEditField(valor, "editaValor" + movimentacao);
+	var tdEditaDescricao = buildEditField(descricao, "editaDescricao", movimentacao);
+	var tdEditaValor = buildEditField(valor, "editaValor", movimentacao);
+	var idEditaValor = buildIdComponente("editaValor", movimentacao);
 
 	tdDescricao.replaceWith(tdEditaDescricao);
 	tdValor.replaceWith(tdEditaValor);
+	$(idEditaValor).maskMoney({
+		allowZero : true
+	});
 }
 
-function buildEditField(value, idCampo){
+function buildEditField(value, nomeCampo, movimentacao){
+	var idCampo = nomeCampo + movimentacao;
 	var tdEdicao = $("<td>");
 	var inputEdicao = $("<input>").attr("type", "text").attr("name", idCampo).attr("id", idCampo).attr("value", value);
 	inputEdicao.keydown(function(e){
 		if(e.which == 13){
 			event.preventDefault();
-			$(this).val();
+			insereNovosValores(movimentacao);
 		}
 	});
 	tdEdicao.append(inputEdicao);
 	return tdEdicao;
 }
 
-
+function insereNovosValores(movimentacao){
+	var idEditaDescricao = buildIdComponente("editaDescricao", movimentacao);
+	var idEditaValor = buildIdComponente("editaValor", movimentacao);
+	var inputEditaDescricao = $(idEditaDescricao);
+	var inputEditaValor = $(idEditaValor);
+	var novoTdDescricao = $("<td>").addClass("descricao" + movimentacao).text(inputEditaDescricao.val());
+	var novoTdValor = $("<td>").addClass("valor" + movimentacao).text(inputEditaValor.val());
+	inputEditaDescricao.parent().replaceWith(novoTdDescricao);
+	inputEditaValor.parent().replaceWith(novoTdValor);
+}
 
 function excluiMovimentacao(event, movimentacao){
 	event.preventDefault();
