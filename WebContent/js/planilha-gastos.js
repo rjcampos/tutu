@@ -99,9 +99,11 @@ function editaMovimentacao(event, movimentacao, botao){
 
 	tdDescricao.replaceWith(tdEditaDescricao);
 	tdValor.replaceWith(tdEditaValor);
+	//Aplica máscara no campo de edição do valor
 	$(classeEditaValor).maskMoney({
 		allowZero : true
 	});
+	botao.addClass("escondido");
 }
 
 function buildEditField(value, nomeCampo, movimentacao){
@@ -111,11 +113,18 @@ function buildEditField(value, nomeCampo, movimentacao){
 	inputEdicao.keydown(function(e){
 		if(e.which == 13){
 			event.preventDefault();
+			mostraBotaoEdicao($(this), movimentacao);
 			insereNovosValores(movimentacao, $(this));
 		}
 	});
 	tdEdicao.append(inputEdicao);
 	return tdEdicao;
+}
+
+function mostraBotaoEdicao(input, movimentacao){
+	var classeBotao = buildClassComponente("botaoEdita", movimentacao);
+	var botao = input.parent().parent().find(classeBotao);
+	botao.removeClass("escondido");
 }
 
 function insereNovosValores(movimentacao, input){
