@@ -2,46 +2,31 @@
 //melhorar mensagem de valor invalido
 $(function() {
 	// Criando máscara para aceitar somente numeros no campo valor
-	$("#valorNovaReceita").maskMoney({
-		allowZero : true
-	});
-	$("#valorNovaDespesa").maskMoney({
-		allowZero : true
-	});
+	formataValor("#valorNovaReceita");
+	formataValor("#valorNovaDespesa");
 
-	//Associando eventos aos botões
-	$("#botaoAdicionaReceita").click(function(event) {
-		adicionaMovimentacao(event, "Receita");
-	});
-	$("#confirmaNovaReceita").click(function(event){
-		confirmaMovimentacao(event, "Receita");
-	});
-	$("#cancelaNovaReceita").click(function(event){
-		cancelaMovimentacao(event, "Receita");
-	});
-	$(".botaoEditaReceita").click(function(event){
-		editaMovimentacao(event, "Receita", $(this));
-	});
-	$(".botaoExcluiReceita").click(function(event){
-		excluiMovimentacao(event, "Receita");
-	});
-
-	$("#botaoAdicionaDespesa").click(function(event) {
-		adicionaMovimentacao(event, "Despesa");
-	});
-	$("#confirmaNovaDespesa").click(function(event){
-		confirmaMovimentacao(event, "Despesa");
-	});
-	$("#cancelaNovaDespesa").click(function(event){
-		cancelaMovimentacao(event, "Despesa");
-	});
-	$(".botaoEditaDespesa").click(function(event){
-		editaMovimentacao(event, "Despesa", $(this));
-	});
-	$(".botaoExcluiDespesa").click(function(event){
-		excluiMovimentacao(event, "Despesa");
-	});
+	iniciaBotoes("Receita");
+	iniciaBotoes("Despesa")
 });
+
+function iniciaBotoes(movimentacao){
+	//Associando eventos aos botões
+	$("#botaoAdiciona" + movimentacao).click(function(event) {
+		adicionaMovimentacao(event, movimentacao);
+	});
+	$("#confirmaNova" + movimentacao).click(function(event){
+		confirmaMovimentacao(event, movimentacao);
+	});
+	$("#cancelaNova" + movimentacao).click(function(event){
+		cancelaMovimentacao(event, movimentacao);
+	});
+	$(".botaoEdita" + movimentacao).click(function(event){
+		editaMovimentacao(event, movimentacao, $(this));
+	});
+	$(".botaoExclui" + movimentacao).click(function(event){
+		excluiMovimentacao(event, movimentacao);
+	});
+}
 
 function adicionaMovimentacao(event, movimentacao){
 	event.preventDefault();
@@ -100,9 +85,7 @@ function editaMovimentacao(event, movimentacao, botao){
 	tdDescricao.replaceWith(tdEditaDescricao);
 	tdValor.replaceWith(tdEditaValor);
 	//Aplica máscara no campo de edição do valor
-	$(classeEditaValor).maskMoney({
-		allowZero : true
-	});
+	formataValor(classeEditaValor);
 	botao.addClass("escondido");
 }
 
@@ -175,24 +158,9 @@ function novaLinha(descricao, valor, movimentacao) {
 	return meuTr;
 }
 
-function valorValido(valor){
-	if(valor === ""){
-		return false;
-	}
-	return true;
-}
-
 function fechaFormulario(idFormulario){
 	zeraValoresFormulario(idFormulario);
 	$(idFormulario).slideUp(600);
-}
-
-function buildIdComponente(componente, movimentacao){
-	return "#" + componente + movimentacao;
-}
-
-function buildClassComponente(componente, movimentacao){
-	return "." + componente + movimentacao;
 }
 
 function zeraValoresFormulario(idFormulario) {

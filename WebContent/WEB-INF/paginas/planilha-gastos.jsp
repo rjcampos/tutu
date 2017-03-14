@@ -143,5 +143,6 @@
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/jquery.maskMoney.js"></script>
 	<script type="text/javascript" src="js/planilha-gastos.js"></script>
+	<script type="text/javascript" src="js/util.js"></script>
 </body>
 </html>
