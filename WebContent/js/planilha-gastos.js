@@ -1,5 +1,7 @@
-//criar coluna data e coluna hidden id
+//calcular total
 //melhorar mensagem de valor invalido
+//criar coluna data e coluna hidden id
+//criar tooltipster para botoes
 $(function() {
 	// Criando máscara para aceitar somente numeros no campo valor
 	formataValor("#valorNovaReceita");
@@ -24,7 +26,7 @@ function iniciaBotoes(movimentacao){
 		editaMovimentacao(event, movimentacao, $(this));
 	});
 	$(".botaoExclui" + movimentacao).click(function(event){
-		excluiMovimentacao(event, movimentacao);
+		excluiMovimentacao(event, movimentacao, $(this));
 	});
 }
 
@@ -89,6 +91,15 @@ function editaMovimentacao(event, movimentacao, botao){
 	botao.addClass("escondido");
 }
 
+function excluiMovimentacao(event, movimentacao, botao){
+	event.preventDefault();
+	var linha = botao.parent().parent();
+	linha.fadeOut(600);
+	setTimeout(function(){
+			linha.remove();
+	}, 1000);
+}
+
 function buildEditField(value, nomeCampo, movimentacao){
 	var classeCampo = nomeCampo + movimentacao;
 	var tdEdicao = $("<td>");
@@ -120,11 +131,6 @@ function insereNovosValores(movimentacao, input){
 	var novoTdValor = $("<td>").addClass("valor" + movimentacao).text(inputEditaValor.val());
 	inputEditaDescricao.parent().replaceWith(novoTdDescricao);
 	inputEditaValor.parent().replaceWith(novoTdValor);
-}
-
-function excluiMovimentacao(event, movimentacao){
-	event.preventDefault();
-	console.log("exclui");
 }
 
 function novaLinha(descricao, valor, movimentacao) {
