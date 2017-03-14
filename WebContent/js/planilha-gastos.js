@@ -1,6 +1,5 @@
-//criar coluna data
+//criar coluna data e coluna hidden id
 //melhorar mensagem de valor invalido
-//Sumir o botao de editar ou trocá-lo por um botáo de confirma durante a edição
 $(function() {
 	// Criando máscara para aceitar somente numeros no campo valor
 	$("#valorNovaReceita").maskMoney({
@@ -96,34 +95,35 @@ function editaMovimentacao(event, movimentacao, botao){
 
 	var tdEditaDescricao = buildEditField(descricao, "editaDescricao", movimentacao);
 	var tdEditaValor = buildEditField(valor, "editaValor", movimentacao);
-	var idEditaValor = buildIdComponente("editaValor", movimentacao);
+	var classeEditaValor = buildClassComponente("editaValor", movimentacao);
 
 	tdDescricao.replaceWith(tdEditaDescricao);
 	tdValor.replaceWith(tdEditaValor);
-	$(idEditaValor).maskMoney({
+	$(classeEditaValor).maskMoney({
 		allowZero : true
 	});
 }
 
 function buildEditField(value, nomeCampo, movimentacao){
-	var idCampo = nomeCampo + movimentacao;
+	var classeCampo = nomeCampo + movimentacao;
 	var tdEdicao = $("<td>");
-	var inputEdicao = $("<input>").attr("type", "text").attr("name", idCampo).attr("id", idCampo).attr("value", value);
+	var inputEdicao = $("<input>").attr("type", "text").attr("name", classeCampo).attr("class", classeCampo).attr("value", value);
 	inputEdicao.keydown(function(e){
 		if(e.which == 13){
 			event.preventDefault();
-			insereNovosValores(movimentacao);
+			insereNovosValores(movimentacao, $(this));
 		}
 	});
 	tdEdicao.append(inputEdicao);
 	return tdEdicao;
 }
 
-function insereNovosValores(movimentacao){
-	var idEditaDescricao = buildIdComponente("editaDescricao", movimentacao);
-	var idEditaValor = buildIdComponente("editaValor", movimentacao);
-	var inputEditaDescricao = $(idEditaDescricao);
-	var inputEditaValor = $(idEditaValor);
+function insereNovosValores(movimentacao, input){
+	var classeEditaDescricao = buildClassComponente("editaDescricao", movimentacao);
+	var classeEditaValor = buildClassComponente("editaValor", movimentacao);
+	//Navega no DOM para localizar os inputs especificos daquela linha
+	var inputEditaDescricao = input.parent().parent().find(classeEditaDescricao);
+	var inputEditaValor = input.parent().parent().find(classeEditaValor);
 	var novoTdDescricao = $("<td>").addClass("descricao" + movimentacao).text(inputEditaDescricao.val());
 	var novoTdValor = $("<td>").addClass("valor" + movimentacao).text(inputEditaValor.val());
 	inputEditaDescricao.parent().replaceWith(novoTdDescricao);
