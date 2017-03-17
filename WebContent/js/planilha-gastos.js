@@ -11,6 +11,9 @@ $(function() {
 	iniciaBotoes("Receita");
 	iniciaBotoes("Despesa")
 
+	iniciaInputs("Receita");
+	iniciaInputs("Despesa");
+
 	atualizaTotal("Receita");
 	atualizaTotal("Despesa");
 });
@@ -31,6 +34,24 @@ function iniciaBotoes(movimentacao){
 	});
 	$(".botaoExclui" + movimentacao).click(function(event){
 		excluiMovimentacao(event, movimentacao, $(this));
+	});
+}
+
+function iniciaInputs(movimentacao){
+	var idInputDescricao = buildIdComponente("descricaoNova", movimentacao);
+	var idInputValor = buildIdComponente("valorNova", movimentacao);
+	associaTeclasNovaMovimentacao(idInputDescricao, movimentacao);
+	associaTeclasNovaMovimentacao(idInputValor, movimentacao);
+}
+
+function associaTeclasNovaMovimentacao(id, movimentacao){
+	$(id).keydown(function(e){
+			if(e.which == 13){
+				confirmaMovimentacao(e, movimentacao);
+			}
+			else if(e.which == 27){
+				cancelaMovimentacao(e, movimentacao);
+			}
 	});
 }
 
