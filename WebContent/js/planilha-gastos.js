@@ -59,6 +59,7 @@ function adicionaMovimentacao(event, movimentacao){
 	event.preventDefault();
 	var idFormulario = buildIdComponente("formInclusao", movimentacao);
 	$(idFormulario).slideToggle(600);
+	$(buildIdComponente("descricaoNova", movimentacao)).focus();
 }
 
 function confirmaMovimentacao(event, movimentacao) {
@@ -109,12 +110,15 @@ function editaMovimentacao(event, movimentacao, botao){
 	var tdEditaDescricao = buildEditField(descricao, "editaDescricao", movimentacao);
 	var tdEditaValor = buildEditField(valor, "editaValor", movimentacao);
 	var classeEditaValor = buildClassComponente("editaValor", movimentacao);
+	var classeEditaDescricao = buildClassComponente("editaDescricao", movimentacao);
 
 	tdDescricao.replaceWith(tdEditaDescricao);
 	tdValor.replaceWith(tdEditaValor);
 	//Aplica máscara no campo de edição do valor
 	formataValor(classeEditaValor);
 	botao.addClass("escondido");
+
+	tdEditaDescricao.find(classeEditaDescricao).focus();
 }
 
 function excluiMovimentacao(event, movimentacao, botao){
