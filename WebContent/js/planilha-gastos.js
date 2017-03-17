@@ -1,7 +1,8 @@
-//calcular total
 //melhorar mensagem de valor invalido
 //criar coluna data e coluna hidden id
 //criar tooltipster para botoes
+
+/*WARNING - fazer o cálculo do total com java no backend por causa da falta de precisão do javascript*/
 $(function() {
 	// Criando máscara para aceitar somente numeros no campo valor
 	formataValor("#valorNovaReceita");
@@ -9,6 +10,9 @@ $(function() {
 
 	iniciaBotoes("Receita");
 	iniciaBotoes("Despesa")
+
+	atualizaTotal("Receita");
+	atualizaTotal("Despesa");
 });
 
 function iniciaBotoes(movimentacao){
@@ -60,6 +64,7 @@ function confirmaMovimentacao(event, movimentacao) {
 			excluiMovimentacao(event, movimentacao, $(this));
 		});
 		$(idTabela).append(linha);
+		atualizaTotal(movimentacao);
 	}
 	fechaFormulario(idFormulario);
 }
@@ -93,10 +98,12 @@ function editaMovimentacao(event, movimentacao, botao){
 
 function excluiMovimentacao(event, movimentacao, botao){
 	event.preventDefault();
+	atualizaTotal(movimentacao);
 	var linha = botao.parent().parent();
 	linha.fadeOut(600);
 	setTimeout(function(){
 			linha.remove();
+			atualizaTotal(movimentacao);
 	}, 1000);
 }
 
@@ -109,6 +116,7 @@ function buildEditField(value, nomeCampo, movimentacao){
 			event.preventDefault();
 			mostraBotaoEdicao($(this), movimentacao);
 			insereNovosValores(movimentacao, $(this));
+			atualizaTotal(movimentacao);
 		}
 	});
 	tdEdicao.append(inputEdicao);
@@ -172,4 +180,17 @@ function fechaFormulario(idFormulario){
 function zeraValoresFormulario(idFormulario) {
 	var seletorFormulario = idFormulario + " input";
 	$(seletorFormulario).val("");
+}
+
+/*Provisório - fazer o cálculo do total com java no backend por causa da falta de precisão do javascript. Formatar o valor calculado para ser exibido na tela*/
+function atualizaTotal(movimentacao){
+	var classColuna = buildClassComponente("valor", movimentacao);
+	var total = 0;
+	$(classColuna).each(function(){
+		total += converteTextoEmNumero($(this).text());
+	});
+	var numeroRedondo = total.toFixed(2);
+	var idTotal = buildIdComponente("valorTotal", movimentacao);
+	$(idTotal).text(numeroRedondo);
+	formataValor(idTotal);
 }

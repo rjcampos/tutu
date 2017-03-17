@@ -18,3 +18,8 @@ function valorValido(valor){
 	}
 	return true;
 }
+
+function converteTextoEmNumero(texto){
+  texto = texto.replace(/,/g, "");
+  return parseFloat(texto);
+}

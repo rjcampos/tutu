@@ -34,7 +34,7 @@
 				<tfoot>
 					<tr>
 						<td>Total</td>
-						<td>5000</td>
+						<td id="valorTotalReceita">5000</td>
 					</tr>
 				</tfoot>
 				<tbody id="corpoTabelaReceita">
@@ -91,7 +91,7 @@
 				<tfoot>
 					<tr>
 						<td>Total</td>
-						<td>5000</td>
+						<td id="valorTotalDespesa">5000</td>
 					</tr>
 				</tfoot>
 				<tbody id="corpoTabelaDespesa">
