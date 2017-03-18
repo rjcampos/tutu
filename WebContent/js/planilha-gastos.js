@@ -41,8 +41,13 @@ function iniciaBotoes(movimentacao){
 function iniciaInputs(movimentacao){
 	var idInputDescricao = buildIdComponente("descricaoNova", movimentacao);
 	var idInputValor = buildIdComponente("valorNova", movimentacao);
+
+	var idInputData = buildIdComponente("dataNova", movimentacao);
+	//WARNING - iniciar input com datepicker
+
 	associaTeclasNovaMovimentacao(idInputDescricao, movimentacao);
 	associaTeclasNovaMovimentacao(idInputValor, movimentacao);
+	associaTeclasNovaMovimentacao(idInputData, movimentacao);
 }
 
 function associaTeclasNovaMovimentacao(id, movimentacao){
@@ -68,16 +73,19 @@ function confirmaMovimentacao(event, movimentacao) {
 	//Variáveis contendo os ids dos componentes HTML
 	var idInputDescricao = buildIdComponente("descricaoNova", movimentacao);
 	var idInputValor = buildIdComponente("valorNova", movimentacao);
+	var idInputData = buildIdComponente("dataNova", movimentacao);
 	var idTabela = buildIdComponente("corpoTabela", movimentacao);
 	var idFormulario = buildIdComponente("formInclusao", movimentacao);
 
 	var descricao = $(idInputDescricao).val();
 	var valor = $(idInputValor).val();
+	var data = $(idInputData).val();
+	//WARNING - Validar data
 	if(!valorValido(valor)){
 		alert("Valor da movimentação inválido");
 	}
 	else{
-		var linha = novaLinha(descricao, valor, movimentacao);
+		var linha = novaLinha(descricao, valor, data, movimentacao);
 		var classEdit = buildClassComponente("botaoEdita", movimentacao);
 		var classDelete = buildClassComponente("BotaoExclui", movimentacao);
 		linha.find(classEdit).click(function(event){
@@ -102,21 +110,30 @@ function editaMovimentacao(event, movimentacao, botao){
 	event.preventDefault();
 	var classeTdDescricao = buildClassComponente("descricao", movimentacao);
 	var classeTdValor = buildClassComponente("valor", movimentacao);
+	var classeTdData = buildClassComponente("data", movimentacao);
 
 	var tdDescricao = botao.parent().siblings(classeTdDescricao);
 	var tdValor = botao.parent().siblings(classeTdValor);
+	var tdData = botao.parent().siblings(classeTdData);
+
 	var descricao = tdDescricao.text();
 	var valor = tdValor.text();
+	var data = tdData.text();
 
 	var tdEditaDescricao = buildEditField(descricao, "editaDescricao", movimentacao);
 	var tdEditaValor = buildEditField(valor, "editaValor", movimentacao);
+	var tdEditaData = buildEditField(data, "editaData", movimentacao);
+
 	var classeEditaValor = buildClassComponente("editaValor", movimentacao);
 	var classeEditaDescricao = buildClassComponente("editaDescricao", movimentacao);
+	var classeEditaData = buildClassComponente("editaData", movimentacao);
 
 	tdDescricao.replaceWith(tdEditaDescricao);
 	tdValor.replaceWith(tdEditaValor);
+	tdData.replaceWith(tdEditaData);
 	//Aplica máscara no campo de edição do valor
 	formataValor(classeEditaValor);
+	//WARNING - aplicar datepicker ao campo de edição da data
 	botao.addClass("escondido");
 
 	tdEditaDescricao.find(classeEditaDescricao).focus();
@@ -158,24 +175,41 @@ function mostraBotaoEdicao(input, movimentacao){
 function insereNovosValores(movimentacao, input){
 	var classeEditaDescricao = buildClassComponente("editaDescricao", movimentacao);
 	var classeEditaValor = buildClassComponente("editaValor", movimentacao);
+	var classeEditaData = buildClassComponente("editaData", movimentacao);
 	//Navega no DOM para localizar os inputs especificos daquela linha
 	var inputEditaDescricao = input.parent().parent().find(classeEditaDescricao);
 	var inputEditaValor = input.parent().parent().find(classeEditaValor);
+	var inputEditaData = input.parent().parent().find(classeEditaData);
+
 	var novoTdDescricao = $("<td>").addClass("descricao" + movimentacao).text(inputEditaDescricao.val());
 	var novoTdValor = $("<td>").addClass("valor" + movimentacao).text(inputEditaValor.val());
+	var novoTdData = $("<td>").addClass("data" + movimentacao).text(inputEditaData.val());
+
 	inputEditaDescricao.parent().replaceWith(novoTdDescricao);
 	inputEditaValor.parent().replaceWith(novoTdValor);
+	inputEditaData.parent().replaceWith(novoTdData);
 }
 
-function novaLinha(descricao, valor, movimentacao) {
+function novaLinha(descricao, valor, data, movimentacao) {
+	//WARNING - faz alguma coisa e recupera o id da linha
+
 	var classeBotaoEdit = "botaoEdita" + movimentacao;
 	var classeBotaoDelete = "BotaoExclui" + movimentacao;
+	var classeTdId = "id" + movimentacao;
 	var classeTdDescricao = "descricao" + movimentacao;
 	var classeTdValor = "valor" + movimentacao;
+	var classeTdData = "data" + movimentacao;
 
 	var meuTr = $("<tr>");
+	//Cria td com o id da linha
+	var tdId = $("<td>").addClass(classeTdId + " escondido");
+	//WARNING - Substituir valor pelo recuperado via AJAX
+	var inputId = $("<input>").attr("type", "hidden").attr("name", "id" + movimentacao).attr("value", "-1");
+	tdId.append(inputId);
+
 	var tdDescricao = $("<td>").addClass(classeTdDescricao).text(descricao);
 	var tdValor = $("<td>").addClass(classeTdValor).text(valor);
+	var tdData = $("<td>").addClass(classeTdData).text(data);
 
 	var tdEdit = $("<td>");
 	var linkEdit = $("<a>").attr("href", "#").addClass(
@@ -191,8 +225,10 @@ function novaLinha(descricao, valor, movimentacao) {
 	linkDelete.append(iconeDelete);
 	tdDelete.append(linkDelete);
 
+	meuTr.append(tdId);
 	meuTr.append(tdDescricao);
 	meuTr.append(tdValor);
+	meuTr.append(tdData);
 	meuTr.append(tdEdit);
 	meuTr.append(tdDelete);
 	return meuTr;
