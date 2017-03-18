@@ -25,23 +25,28 @@
 			<table class="bordered highlight">
 				<thead>
 					<tr>
-						<th colspan="2">Receitas</th>
+						<th colspan="3">Receitas</th>
 					</tr>
 					<tr>
 						<th>Descrição</th>
 						<th>Valor</th>
+						<th>Data</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
 						<td>Total</td>
-						<td id="valorTotalReceita">5000</td>
+						<td id="valorTotalReceita"></td>
 					</tr>
 				</tfoot>
 				<tbody id="corpoTabelaReceita">
 					<tr>
+						<td class="idReceita escondido">
+							<input type="hidden" name="idReceita" value="-1">
+						</td>
 						<td class="descricaoReceita">Lorem ipsum</td>
 						<td class="valorReceita">123.45</td>
+						<td class="dataReceita">01/01/2017</td>
 						<td><a href="#"
 							class=" btn-floating btn-medium waves-effect waves-light blue botaoEditaReceita">
 								<i class="material-icons">edit</i>
@@ -67,6 +72,10 @@
 						<label for="valorNovaReceita">Valor</label> <input type="text"
 							name="valorNovaReceita" id="valorNovaReceita" />
 					</div>
+					<div class="input-field">
+						<label for="dataNovaReceita">Data</label> <input type="text"
+							name="dataNovaReceita" id="dataNovaReceita" />
+					</div>
 					<a href="#" class=" btn-floating btn-small waves-effect waves-light green" id="confirmaNovaReceita">
 						<i class="material-icons">done</i>
 					</a> 
@@ -82,23 +91,28 @@
 			<table class="bordered highlight">
 				<thead>
 					<tr>
-						<th colspan="2">Despesas</th>
+						<th colspan="3">Despesas</th>
 					</tr>
 					<tr>
 						<th>Descrição</th>
 						<th>Valor</th>
+						<th>Data</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
 						<td>Total</td>
-						<td id="valorTotalDespesa">5000</td>
+						<td id="valorTotalDespesa"></td>
 					</tr>
 				</tfoot>
 				<tbody id="corpoTabelaDespesa">
 					<tr>
+						<td class="idDespesa escondido">
+							<input type="hidden" name="idDespesa" value="-1" />
+						</td>
 						<td class="descricaoDespesa">Lorem ipsum</td>
 						<td class="valorDespesa">123.45</td>
+						<td class="dataDespesa">01/01/2017</td>
 						<td><a href="#"
 							class=" btn-floating btn-medium waves-effect waves-light blue botaoEditaDespesa">
 								<i class="material-icons">edit</i>
@@ -123,6 +137,10 @@
 					<div class="input-field">
 						<label for="valorNovaDespesa">Valor</label> <input type="text"
 							name="valorNovaDespesa" id="valorNovaDespesa" />
+					</div>
+					<div class="input-field">
+						<label for="dataNovaDespesa">Data</label> <input type="text"
+							name="dataNovaDespesa" id="dataNovaDespesa" />
 					</div>
 					<a href="#" class=" btn-floating btn-small waves-effect waves-light green" id="confirmaNovaDespesa">
 						<i class="material-icons">done</i>
