@@ -1,9 +1,10 @@
 //melhorar mensagem de valor invalido
 //criar coluna data e coluna hidden id
-//criar tooltipster para botoes
 
 /*WARNING - fazer o cálculo do total com java no backend por causa da falta de precisão do javascript*/
 $(function() {
+	$(document).tooltip();
+
 	// Criando máscara para aceitar somente numeros no campo valor
 	formataValor("#valorNovaReceita");
 	formataValor("#valorNovaDespesa");

@@ -10,6 +10,7 @@
 <!--Import materialize.css-->
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
+<link type="text/css" rel="stylesheet" href="css/jquery-ui.css" />
 <link type="text/css" rel="stylesheet" href="css/estilos.css" />
 <link type="text/css" rel="stylesheet" href="css/planilha-gastos.css" />
 </head>
@@ -54,7 +55,7 @@
 			</table>
 			<a href="#"
 				class=" btn-floating btn-medium waves-effect waves-light green"
-				id="botaoAdicionaReceita"> <i class="material-icons">add</i>
+				id="botaoAdicionaReceita" title="Adiciona nova receita"> <i class="material-icons">add</i>
 			</a>
 			<form method="POST" class="row escondido" id="formInclusaoReceita">
 				<fieldset class="col s4">
@@ -110,7 +111,7 @@
 				</tbody>
 			</table>
 			<a href="#"
-				class=" btn-floating btn-medium waves-effect waves-light red" id="botaoAdicionaDespesa"> <i
+				class=" btn-floating btn-medium waves-effect waves-light red" id="botaoAdicionaDespesa" title="Adiciona nova despesa"> <i
 				class="material-icons">add</i>
 			</a>
 			<form method="POST" class="row escondido" id="formInclusaoDespesa">
@@ -142,6 +143,7 @@
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/jquery.maskMoney.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/planilha-gastos.js"></script>
 	<script type="text/javascript" src="js/util.js"></script>
 </body>
