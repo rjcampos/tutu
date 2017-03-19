@@ -1,5 +1,6 @@
 //melhorar mensagem de valor invalido
-//criar coluna data e coluna hidden id
+//trocar botao edita por confirma ediçao
+//acrescentar botao confirma + novo
 
 /*WARNING - fazer o cálculo do total com java no backend por causa da falta de precisão do javascript*/
 $(function() {
@@ -43,8 +44,8 @@ function iniciaInputs(movimentacao){
 	var idInputValor = buildIdComponente("valorNova", movimentacao);
 
 	var idInputData = buildIdComponente("dataNova", movimentacao);
-	//WARNING - iniciar input com datepicker
 
+	formataInputData(idInputData);
 	associaTeclasNovaMovimentacao(idInputDescricao, movimentacao);
 	associaTeclasNovaMovimentacao(idInputValor, movimentacao);
 	associaTeclasNovaMovimentacao(idInputData, movimentacao);
@@ -133,7 +134,7 @@ function editaMovimentacao(event, movimentacao, botao){
 	tdData.replaceWith(tdEditaData);
 	//Aplica máscara no campo de edição do valor
 	formataValor(classeEditaValor);
-	//WARNING - aplicar datepicker ao campo de edição da data
+	formataInputData(classeEditaData);
 	botao.addClass("escondido");
 
 	tdEditaDescricao.find(classeEditaDescricao).focus();
@@ -157,9 +158,11 @@ function buildEditField(value, nomeCampo, movimentacao){
 	inputEdicao.keydown(function(e){
 		if(e.which == 13){
 			event.preventDefault();
+			$(this).parent().parent().find(".editaData" + movimentacao).datepicker("hide");
 			mostraBotaoEdicao($(this), movimentacao);
 			insereNovosValores(movimentacao, $(this));
 			atualizaTotal(movimentacao);
+
 		}
 	});
 	tdEdicao.append(inputEdicao);

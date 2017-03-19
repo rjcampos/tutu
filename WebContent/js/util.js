@@ -4,6 +4,12 @@ function formataValor(idCampo){
 	});
 }
 
+function formataInputData(idInput){
+  $(idInput).datepicker({
+    dateFormat: "dd/mm/yy",
+  }).mask("99/99/9999");
+}
+
 function buildIdComponente(componente, movimentacao){
 	return "#" + componente + movimentacao;
 }
