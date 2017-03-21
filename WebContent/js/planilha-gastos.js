@@ -81,6 +81,24 @@ function confirmaMovimentacao(event, movimentacao) {
 	var descricao = $(idInputDescricao).val();
 	var valor = $(idInputValor).val();
 	var data = $(idInputData).val();
+
+	var novaMovimentacao = new Object();
+	novaMovimentacao.descricao = descricao;
+	novaMovimentacao.valor = valor;
+	novaMovimentacao.data = data;
+
+	$.post("NovaLinha", novaMovimentacao, function(data){
+		console.log(data);
+		console.log("teste");
+		alert(data);
+	})
+	.fail(function(){
+		console.log("erro");
+	})
+	.always(function(){
+		console.log("always");
+	});
+
 	//WARNING - Validar data
 	if(!valorValido(valor)){
 		alert("Valor da movimentação inválido");
@@ -162,7 +180,6 @@ function buildEditField(value, nomeCampo, movimentacao){
 			mostraBotaoEdicao($(this), movimentacao);
 			insereNovosValores(movimentacao, $(this));
 			atualizaTotal(movimentacao);
-
 		}
 	});
 	tdEdicao.append(inputEdicao);
