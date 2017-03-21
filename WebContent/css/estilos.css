@@ -5,6 +5,14 @@ body{
     flex-direction: column;
 }
 
+th{
+	font-size: 1.2em;
+}
+
+footer{
+	padding-bottom: 10px;
+}
+
 main {
 	flex: 1 0 auto;
 }
