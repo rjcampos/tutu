@@ -1,6 +1,8 @@
 //melhorar mensagem de valor invalido
 //trocar botao edita por confirma ediçao
 //acrescentar botao confirma + novo
+//Implementar loading no ajax
+//tooltip em cima
 
 /*WARNING - fazer o cálculo do total com java no backend por causa da falta de precisão do javascript*/
 $(function() {
@@ -82,41 +84,44 @@ function confirmaMovimentacao(event, movimentacao) {
 	var valor = $(idInputValor).val();
 	var data = $(idInputData).val();
 
-	var novaMovimentacao = new Object();
-	novaMovimentacao.descricao = descricao;
-	novaMovimentacao.valor = valor;
-	novaMovimentacao.data = data;
-
-	$.post("NovaLinha", novaMovimentacao, function(data){
-		console.log(data);
-		console.log("teste");
-		alert(data);
-	})
-	.fail(function(){
-		console.log("erro");
-	})
-	.always(function(){
-		console.log("always");
-	});
-
 	//WARNING - Validar data
 	if(!valorValido(valor)){
 		alert("Valor da movimentação inválido");
 	}
 	else{
-		var linha = novaLinha(descricao, valor, data, movimentacao);
-		var classEdit = buildClassComponente("botaoEdita", movimentacao);
-		var classDelete = buildClassComponente("BotaoExclui", movimentacao);
-		linha.find(classEdit).click(function(event){
-			editaMovimentacao(event, movimentacao, $(this));
+		var novaMovimentacao = new Object();
+		novaMovimentacao.descricao = descricao;
+		novaMovimentacao.valor = valor;
+		novaMovimentacao.data = data;
+		novaMovimentacao.movimentacao = movimentacao;
+		$.when( enviaLinhaParaServidor(novaMovimentacao)	).then(function(){
+			console.log("OK, deu certo " +  novaMovimentacao.id);
+			var linha = novaLinha(descricao, valor, data, movimentacao);
+			var classEdit = buildClassComponente("botaoEdita", movimentacao);
+			var classDelete = buildClassComponente("BotaoExclui", movimentacao);
+			linha.find(classEdit).click(function(event){
+				editaMovimentacao(event, movimentacao, $(this));
+			});
+			linha.find(classDelete).click(function(event){
+				excluiMovimentacao(event, movimentacao, $(this));
+			});
+			$(idTabela).append(linha);
+			atualizaTotal(movimentacao);
 		});
-		linha.find(classDelete).click(function(event){
-			excluiMovimentacao(event, movimentacao, $(this));
-		});
-		$(idTabela).append(linha);
-		atualizaTotal(movimentacao);
 	}
 	fechaFormulario(idFormulario);
+}
+
+/*Recebe os parametros da movimentação a ser enviada para o servidor e persistida.
+Caso tenha êxito, retorna o id da movimentação criada no banco. Caso contrário, retorna -1*/
+function enviaLinhaParaServidor(novaMovimentacao){
+	return $.post("NovaLinha", novaMovimentacao, function(resposta){
+		novaMovimentacao.id = resposta;
+	})
+	.fail(function(){
+		alert("Falha na comunicação com o servidor");
+		novaMovimentacao.id = -1;
+	})
 }
 
 function cancelaMovimentacao(event, movimentacao) {
@@ -167,6 +172,7 @@ function excluiMovimentacao(event, movimentacao, botao){
 			linha.remove();
 			atualizaTotal(movimentacao);
 	}, 1000);
+	//WARNING - AJAX para remover linha
 }
 
 function buildEditField(value, nomeCampo, movimentacao){
@@ -180,6 +186,8 @@ function buildEditField(value, nomeCampo, movimentacao){
 			mostraBotaoEdicao($(this), movimentacao);
 			insereNovosValores(movimentacao, $(this));
 			atualizaTotal(movimentacao);
+
+			//WARNING - AJAX para atualizar valores
 		}
 	});
 	tdEdicao.append(inputEdicao);
