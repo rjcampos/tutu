@@ -19,14 +19,15 @@ public class MovimentacaoDAO {
 	}
 	
 	//Retorna o id gerado no BD
-	public int criaMovimentacao(String descricao, String valor, String data){
+	public int criaMovimentacao(String descricao, BigDecimal valor, Calendar data, TipoMovimentacao tipo, Integer idUsuario, boolean fixa){
 		Movimentacao mov = new Movimentacao();
 		mov.setDescricao(descricao);
-		mov.setValor(new BigDecimal(valor));
-		mov.setData(Util.parseDataIntoCalendar(data).build());
+		mov.setValor(valor);
+		mov.setData(data);
 		mov.setMovimentacao_fixa(false);
-		mov.setTipo_movimentacao(TipoMovimentacao.Receita);
-		Usuario user = manager.find(Usuario.class, 1);
+		mov.setTipo_movimentacao(tipo);
+		mov.setMovimentacao_fixa(fixa);
+		Usuario user = manager.find(Usuario.class, idUsuario);
 		mov.setUsuario(user);
 		
 		manager.getTransaction().begin();

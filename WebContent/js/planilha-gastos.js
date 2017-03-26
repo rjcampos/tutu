@@ -1,8 +1,9 @@
-//melhorar mensagem de valor invalido
+//melhorar mensagens de erro
 //trocar botao edita por confirma ediçao
 //acrescentar botao confirma + novo
 //Implementar loading no ajax
 //tooltip em cima
+//
 
 /*WARNING - fazer o cálculo do total com java no backend por causa da falta de precisão do javascript*/
 $(function() {
@@ -77,12 +78,14 @@ function confirmaMovimentacao(event, movimentacao) {
 	var idInputDescricao = buildIdComponente("descricaoNova", movimentacao);
 	var idInputValor = buildIdComponente("valorNova", movimentacao);
 	var idInputData = buildIdComponente("dataNova", movimentacao);
+	var idInputFixa = buildIdComponente("fixaNova", movimentacao);
 	var idTabela = buildIdComponente("corpoTabela", movimentacao);
 	var idFormulario = buildIdComponente("formInclusao", movimentacao);
 
 	var descricao = $(idInputDescricao).val();
 	var valor = $(idInputValor).val();
 	var data = $(idInputData).val();
+	var fixa = $(idInputFixa).prop("checked");
 
 	//WARNING - Validar data
 	if(!valorValido(valor)){
@@ -91,35 +94,38 @@ function confirmaMovimentacao(event, movimentacao) {
 	else{
 		var novaMovimentacao = new Object();
 		novaMovimentacao.descricao = descricao;
-		novaMovimentacao.valor = valor;
+		novaMovimentacao.valor = converteTextoEmNumero(valor);
 		novaMovimentacao.data = data;
 		novaMovimentacao.movimentacao = movimentacao;
+		novaMovimentacao.idUsuario = $("#idUsuario").val();
+		novaMovimentacao.fixa = fixa;
 		$.when( enviaLinhaParaServidor(novaMovimentacao)	).then(function(){
-			console.log("OK, deu certo " +  novaMovimentacao.id);
-			var linha = novaLinha(descricao, valor, data, movimentacao);
-			var classEdit = buildClassComponente("botaoEdita", movimentacao);
-			var classDelete = buildClassComponente("BotaoExclui", movimentacao);
-			linha.find(classEdit).click(function(event){
-				editaMovimentacao(event, movimentacao, $(this));
-			});
-			linha.find(classDelete).click(function(event){
-				excluiMovimentacao(event, movimentacao, $(this));
-			});
-			$(idTabela).append(linha);
-			atualizaTotal(movimentacao);
+			if(novaMovimentacao.id >= 0){
+				var linha = novaLinha(novaMovimentacao.id, descricao, valor, data, movimentacao, novaMovimentacao.fixa);
+				var classEdit = buildClassComponente("botaoEdita", movimentacao);
+				var classDelete = buildClassComponente("BotaoExclui", movimentacao);
+				linha.find(classEdit).click(function(event){
+					editaMovimentacao(event, movimentacao, $(this));
+				});
+				linha.find(classDelete).click(function(event){
+					excluiMovimentacao(event, movimentacao, $(this));
+				});
+				$(idTabela).append(linha);
+				atualizaTotal(movimentacao);
+			}
 		});
 	}
 	fechaFormulario(idFormulario);
 }
 
-/*Recebe os parametros da movimentação a ser enviada para o servidor e persistida.
+/*Recebe os parametros da movimentação a ser enviada para o servidor
 Caso tenha êxito, retorna o id da movimentação criada no banco. Caso contrário, retorna -1*/
 function enviaLinhaParaServidor(novaMovimentacao){
 	return $.post("NovaLinha", novaMovimentacao, function(resposta){
 		novaMovimentacao.id = resposta;
 	})
 	.fail(function(){
-		alert("Falha na comunicação com o servidor");
+		alert("Falha na comunicação com o servidor ou parametro invalido");
 		novaMovimentacao.id = -1;
 	})
 }
@@ -135,6 +141,7 @@ function editaMovimentacao(event, movimentacao, botao){
 	var classeTdDescricao = buildClassComponente("descricao", movimentacao);
 	var classeTdValor = buildClassComponente("valor", movimentacao);
 	var classeTdData = buildClassComponente("data", movimentacao);
+	var classeTdFixa = buildClassComponente("fixa", movimentacao);
 
 	var tdDescricao = botao.parent().siblings(classeTdDescricao);
 	var tdValor = botao.parent().siblings(classeTdValor);
@@ -218,12 +225,11 @@ function insereNovosValores(movimentacao, input){
 	inputEditaData.parent().replaceWith(novoTdData);
 }
 
-function novaLinha(descricao, valor, data, movimentacao) {
-	//WARNING - faz alguma coisa e recupera o id da linha
-
+function novaLinha(id, descricao, valor, data, movimentacao, fixa) {
 	var classeBotaoEdit = "botaoEdita" + movimentacao;
 	var classeBotaoDelete = "BotaoExclui" + movimentacao;
 	var classeTdId = "id" + movimentacao;
+	var classeTdFixa = "id" + movimentacao;
 	var classeTdDescricao = "descricao" + movimentacao;
 	var classeTdValor = "valor" + movimentacao;
 	var classeTdData = "data" + movimentacao;
@@ -231,9 +237,12 @@ function novaLinha(descricao, valor, data, movimentacao) {
 	var meuTr = $("<tr>");
 	//Cria td com o id da linha
 	var tdId = $("<td>").addClass(classeTdId + " escondido");
-	//WARNING - Substituir valor pelo recuperado via AJAX
-	var inputId = $("<input>").attr("type", "hidden").attr("name", "id" + movimentacao).attr("value", "-1");
+	var inputId = $("<input>").attr("type", "hidden").attr("name", classeTdId).attr("value", id);
 	tdId.append(inputId);
+	//Cria td indicando se movimentacao é recorrente
+	var tdFixa = $("<td>").addClass(classeTdFixa + " escondido");
+	var inputFixa = $("<input>").attr("type", "hidden").attr("name", classeTdFixa).attr("value", fixa);
+	tdFixa.append(inputFixa);
 
 	var tdDescricao = $("<td>").addClass(classeTdDescricao).text(descricao);
 	var tdValor = $("<td>").addClass(classeTdValor).text(valor);
@@ -254,6 +263,7 @@ function novaLinha(descricao, valor, data, movimentacao) {
 	tdDelete.append(linkDelete);
 
 	meuTr.append(tdId);
+	meuTr.append(tdFixa);
 	meuTr.append(tdDescricao);
 	meuTr.append(tdValor);
 	meuTr.append(tdData);
@@ -270,9 +280,11 @@ function fechaFormulario(idFormulario){
 function zeraValoresFormulario(idFormulario) {
 	var seletorFormulario = idFormulario + " input";
 	$(seletorFormulario).val("");
+	seletorFormulario = idFormulario + " input:checkbox";
+	$(seletorFormulario).prop("checked", false);
 }
 
-/*Provisório - fazer o cálculo do total com java no backend por causa da falta de precisão do javascript. Formatar o valor calculado para ser exibido na tela*/
+/*WARNING - fazer o cálculo do total com java no backend por causa da falta de precisão do javascript. Formatar o valor calculado para ser exibido na tela*/
 function atualizaTotal(movimentacao){
 	var classColuna = buildClassComponente("valor", movimentacao);
 	var total = 0;

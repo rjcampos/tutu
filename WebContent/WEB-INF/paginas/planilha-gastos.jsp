@@ -19,6 +19,7 @@
 	<div class="container section">
 		<div class="dados-sessao">
 			<p>Logado como: usuario</p>
+			<input type="hidden" value="1" id="idUsuario" />
 			<p>Mês/ano</p>
 		</div>
 		<section class="receitas">
@@ -43,6 +44,9 @@
 					<tr>
 						<td class="idReceita escondido">
 							<input type="hidden" name="idReceita" value="-1">
+						</td>
+						<td class="fixaReceita escondido">
+							<input type="hidden" name="fixaReceita" value="false">
 						</td>
 						<td class="descricaoReceita">Lorem ipsum</td>
 						<td class="valorReceita">123.45</td>
@@ -76,6 +80,10 @@
 						<label for="dataNovaReceita">Data</label> <input type="text"
 							name="dataNovaReceita" id="dataNovaReceita" />
 					</div>
+					<p>
+						<input type="checkbox" name="fixaNovaReceita" id="fixaNovaReceita" />
+						<label for="fixaNovaReceita">Repetir receita mensalmente</label>
+					</p>
 					<a href="#" class=" btn-floating btn-small waves-effect waves-light green" id="confirmaNovaReceita">
 						<i class="material-icons">done</i>
 					</a> 
@@ -110,6 +118,9 @@
 						<td class="idDespesa escondido">
 							<input type="hidden" name="idDespesa" value="-1" />
 						</td>
+						<td class="fixaDespesa escondido">
+							<input type="hidden" name="fixaDespesa" value="false">
+						</td>
 						<td class="descricaoDespesa">Lorem ipsum</td>
 						<td class="valorDespesa">123.45</td>
 						<td class="dataDespesa">01/01/2017</td>
@@ -142,6 +153,10 @@
 						<label for="dataNovaDespesa">Data</label> <input type="text"
 							name="dataNovaDespesa" id="dataNovaDespesa" />
 					</div>
+					<p>
+						<input type="checkbox" name="fixaNovaDespesa" id="fixaNovaDespesa" />
+						<label for="fixaNovaDespesa">Repetir despesa mensalmente</label>
+					</p>
 					<a href="#" class=" btn-floating btn-small waves-effect waves-light green" id="confirmaNovaDespesa">
 						<i class="material-icons">done</i>
 					</a> 
