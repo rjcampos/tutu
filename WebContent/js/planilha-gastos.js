@@ -146,10 +146,12 @@ function editaMovimentacao(event, movimentacao, botao){
 	var tdDescricao = botao.parent().siblings(classeTdDescricao);
 	var tdValor = botao.parent().siblings(classeTdValor);
 	var tdData = botao.parent().siblings(classeTdData);
+	var tdFixa = botao.parent().siblings(classeTdFixa);
 
 	var descricao = tdDescricao.text();
 	var valor = tdValor.text();
 	var data = tdData.text();
+	var fixa = tdFixa.children("input").val();
 
 	var tdEditaDescricao = buildEditField(descricao, "editaDescricao", movimentacao);
 	var tdEditaValor = buildEditField(valor, "editaValor", movimentacao);
@@ -229,7 +231,7 @@ function novaLinha(id, descricao, valor, data, movimentacao, fixa) {
 	var classeBotaoEdit = "botaoEdita" + movimentacao;
 	var classeBotaoDelete = "BotaoExclui" + movimentacao;
 	var classeTdId = "id" + movimentacao;
-	var classeTdFixa = "id" + movimentacao;
+	var classeTdFixa = "fixa" + movimentacao;
 	var classeTdDescricao = "descricao" + movimentacao;
 	var classeTdValor = "valor" + movimentacao;
 	var classeTdData = "data" + movimentacao;
